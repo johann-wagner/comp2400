@@ -33,16 +33,28 @@ library(knitr)
 ## Load in Movie data
 
 ```{r Data Loading}
-PERSON <- read_xlsx("movies.xlsx",
-  sheet = "PERSON"
-)
-
 MOVIE <- read_xlsx("movies.xlsx",
   sheet = "MOVIE"
 )
 
+PERSON <- read_xlsx("movies.xlsx",
+  sheet = "PERSON"
+)
+
+AWARD <- read_xlsx("movies.xlsx",
+  sheet = "AWARD"
+)
+
+WRITER <- read_xlsx("movies.xlsx",
+  sheet = "WRITER"
+)
+
 RESTRICTION <- read_xlsx("movies.xlsx",
   sheet = "RESTRICTION"
+)
+
+WRITER_AWARD <- read_xlsx("movies.xlsx",
+  sheet = "WRITER_AWARD"
 )
 ```
 
@@ -85,5 +97,30 @@ MOVIE %>%
   ) %>%
   summarise(mean_run_time = mean(run_time) %>% 
               round(2)) %>% 
+  kable()
+```
+
+#### **Question 3**
+
+Which writers have won a writer award in 1994? List the ids, the first and last names of the writers along with the award names.
+
+```{r Question 3}
+WRITER_AWARD %>% 
+  left_join(
+    WRITER,
+    join_by(id, title, production_year)
+  ) %>%
+  left_join(
+    PERSON,
+    join_by(id)
+  ) %>% 
+  left_join(
+    AWARD,
+    join_by(award_name)
+  ) %>% 
+  filter(
+    production_year == 1994,
+  ) %>%
+  select(id, first_name, last_name, award_name) %>% 
   kable()
 ```

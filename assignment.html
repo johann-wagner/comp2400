@@ -1595,17 +1595,29 @@ package is a that integrates computing and reporting.</p>
 </div>
 <div id="load-in-movie-data" class="section level2">
 <h2>Load in Movie data</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>PERSON <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;PERSON&quot;</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>MOVIE <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;MOVIE&quot;</span></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>)</span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>MOVIE <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;MOVIE&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>PERSON <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;PERSON&quot;</span></span>
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>)</span>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>RESTRICTION <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;RESTRICTION&quot;</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>AWARD <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;AWARD&quot;</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>)</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>WRITER <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;WRITER&quot;</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>RESTRICTION <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;RESTRICTION&quot;</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>)</span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>WRITER_AWARD <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;WRITER_AWARD&quot;</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </div>
 <div id="assignment-questions" class="section level1">
@@ -1667,6 +1679,47 @@ decimal places, e.g., if x=0.1129, then ROUND(x, 2) = 0.11.</em></p>
 <tbody>
 <tr class="odd">
 <td align="right">107.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="question-3" class="section level4">
+<h4><strong>Question 3</strong></h4>
+<p>Which writers have won a writer award in 1994? List the ids, the
+first and last names of the writers along with the award names.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>WRITER_AWARD <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    WRITER,</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    <span class="fu">join_by</span>(id, title, production_year)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    PERSON,</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>    <span class="fu">join_by</span>(id)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    AWARD,</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    <span class="fu">join_by</span>(award_name)</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    production_year <span class="sc">==</span> <span class="dv">1994</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>  <span class="fu">select</span>(id, first_name, last_name, award_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">id</th>
+<th align="left">first_name</th>
+<th align="left">last_name</th>
+<th align="left">award_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1005</td>
+<td align="left">Woody</td>
+<td align="left">Allen</td>
+<td align="left">Oscar</td>
 </tr>
 </tbody>
 </table>
