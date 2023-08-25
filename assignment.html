@@ -1697,35 +1697,51 @@ decimal places, e.g., if x=0.1129, then ROUND(x, 2) = 0.11.</em></p>
 </div>
 <div id="question-3" class="section level4">
 <h4><strong>Question 3</strong></h4>
-<p>How many movies have at most 2 crew members? List that number.</p>
+<p>Of all the movies that have crew members, how many movies have at
+most 2 crew members? List that number.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>CREW <span class="sc">%&gt;%</span> </span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="fu">group_by</span>(title, production_year) <span class="sc">%&gt;%</span> </span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&lt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 1
-##       n
-##   &lt;int&gt;
-## 1    11</code></pre>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">11</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="question-4" class="section level4">
 <h4><strong>Question 4</strong></h4>
 <p>Find director(s) who have never been nominated for a director award.
 List their count.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>DIRECTOR_AWARD <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="fu">left_join</span>(DIRECTOR,</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>            <span class="fu">join_by</span>(title, production_year))</span></code></pre></div>
-<pre><code>## # A tibble: 7 × 7
-##   title           production_year award_name year_of_award category result    id
-##   &lt;chr&gt;                     &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt;
-## 1 SavingPrivateR…            1998 Oscar               1998 Directi… won     1291
-## 2 AmericanBeauty             1999 Oscar               1999 Directi… won       81
-## 3 ThePiano                   1993 AFIAward            1993 BestDir… won      301
-## 4 StrictlyBallro…            1992 AFIAward            1992 BestDir… won      341
-## 5 Titanic                    1997 Oscar               1998 BestDir… won        1
-## 6 Traffic                    2000 Oscar               2001 BestDir… won      441
-## 7 BulletsOverBro…            1994 Oscar               1995 BestDir… nomin…  1005</code></pre>
+<p><em>Hint: If an award has been won, then implicitly the winner must
+have been nominated.</em></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>DIRECTOR <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="fu">anti_join</span>(DIRECTOR_AWARD,</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>            <span class="fu">join_by</span>(title, production_year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">95</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
