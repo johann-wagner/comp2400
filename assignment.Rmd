@@ -49,6 +49,10 @@ WRITER <- read_xlsx("movies.xlsx",
   sheet = "WRITER"
 )
 
+CREW <- read_xlsx("movies.xlsx",
+  sheet = "CREW"
+)
+
 RESTRICTION <- read_xlsx("movies.xlsx",
   sheet = "RESTRICTION"
 )
@@ -110,25 +114,17 @@ MOVIE %>%
 
 #### **Question 3**
 
-Which writers have won a writer award in 1994? List the ids, the first and last names of the writers along with the award names.
+How many movies have at most 2 crew members? List that number.
 
 ```{r Question 3}
-WRITER_AWARD %>%
-  left_join(WRITER,
-            join_by(id, title, production_year)
-  ) %>%
-  left_join(PERSON,
-            join_by(id)
-  ) %>%
-  left_join(AWARD,
-            join_by(award_name)
-  ) %>%
-  filter(
-    production_year == 1994,
-  ) %>%
-  select(id, first_name, last_name, award_name) %>%
-  kable()
+CREW %>% 
+  group_by(title, production_year) %>% 
+  count() %>%
+  ungroup() %>% 
+  filter(n <= 2) %>% 
+  count()
 ```
+
 
 #### **Question 4**
 
