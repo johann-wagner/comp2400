@@ -1615,9 +1615,17 @@ package is a that integrates computing and reporting.</p>
 <span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;RESTRICTION&quot;</span></span>
 <span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>)</span>
 <span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>WRITER_AWARD <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;WRITER_AWARD&quot;</span></span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>DIRECTOR <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;DIRECTOR&quot;</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>)</span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>DIRECTOR_AWARD <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;DIRECTOR_AWARD&quot;</span></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>)</span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>WRITER_AWARD <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;WRITER_AWARD&quot;</span></span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </div>
 <div id="assignment-questions" class="section level1">
@@ -1635,7 +1643,7 @@ List that number.</p>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>    year_born <span class="sc">&gt;</span> <span class="dv">1974</span>,</span>
 <span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    first_name_last <span class="sc">==</span> <span class="st">&quot;e&quot;</span></span>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
@@ -1667,8 +1675,8 @@ decimal places, e.g., if x=0.1129, then ROUND(x, 2) = 0.11.</em></p>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>    description <span class="sc">==</span> <span class="st">&quot;PG-13&quot;</span>,</span>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>    country.y <span class="sc">==</span> <span class="st">&quot;USA&quot;</span></span>
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_run_time =</span> <span class="fu">mean</span>(run_time) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>              <span class="fu">round</span>(<span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_run_time =</span> <span class="fu">mean</span>(run_time) <span class="sc">%&gt;%</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
@@ -1687,24 +1695,21 @@ decimal places, e.g., if x=0.1129, then ROUND(x, 2) = 0.11.</em></p>
 <h4><strong>Question 3</strong></h4>
 <p>Which writers have won a writer award in 1994? List the ids, the
 first and last names of the writers along with the award names.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>WRITER_AWARD <span class="sc">%&gt;%</span> </span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    WRITER,</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    <span class="fu">join_by</span>(id, title, production_year)</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    PERSON,</span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>    <span class="fu">join_by</span>(id)</span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    AWARD,</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    <span class="fu">join_by</span>(award_name)</span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    production_year <span class="sc">==</span> <span class="dv">1994</span>,</span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>  <span class="fu">select</span>(id, first_name, last_name, award_name) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>WRITER_AWARD <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="fu">left_join</span>(WRITER,</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>            <span class="fu">join_by</span>(id, title, production_year)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="fu">left_join</span>(PERSON,</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>            <span class="fu">join_by</span>(id)</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  <span class="fu">left_join</span>(AWARD,</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>            <span class="fu">join_by</span>(award_name)</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    production_year <span class="sc">==</span> <span class="dv">1994</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>  <span class="fu">select</span>(id, first_name, last_name, award_name) <span class="sc">%&gt;%</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1723,6 +1728,24 @@ first and last names of the writers along with the award names.</p>
 </tr>
 </tbody>
 </table>
+</div>
+<div id="question-4" class="section level4">
+<h4><strong>Question 4</strong></h4>
+<p>Find director(s) who have never been nominated for a director award.
+List their count.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>DIRECTOR_AWARD <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="fu">left_join</span>(DIRECTOR,</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>            <span class="fu">join_by</span>(title, production_year))</span></code></pre></div>
+<pre><code>## # A tibble: 7 × 7
+##   title           production_year award_name year_of_award category result    id
+##   &lt;chr&gt;                     &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt;
+## 1 SavingPrivateR…            1998 Oscar               1998 Directi… won     1291
+## 2 AmericanBeauty             1999 Oscar               1999 Directi… won       81
+## 3 ThePiano                   1993 AFIAward            1993 BestDir… won      301
+## 4 StrictlyBallro…            1992 AFIAward            1992 BestDir… won      341
+## 5 Titanic                    1997 Oscar               1998 BestDir… won        1
+## 6 Traffic                    2000 Oscar               2001 BestDir… won      441
+## 7 BulletsOverBro…            1994 Oscar               1995 BestDir… nomin…  1005</code></pre>
 </div>
 </div>
 

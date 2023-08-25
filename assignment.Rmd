@@ -53,6 +53,14 @@ RESTRICTION <- read_xlsx("movies.xlsx",
   sheet = "RESTRICTION"
 )
 
+DIRECTOR <- read_xlsx("movies.xlsx",
+  sheet = "DIRECTOR"
+)
+
+DIRECTOR_AWARD <- read_xlsx("movies.xlsx",
+  sheet = "DIRECTOR_AWARD"
+)
+
 WRITER_AWARD <- read_xlsx("movies.xlsx",
   sheet = "WRITER_AWARD"
 )
@@ -74,7 +82,7 @@ PERSON %>%
     year_born > 1974,
     first_name_last == "e"
   ) %>%
-  count() %>% 
+  count() %>%
   kable()
 ```
 
@@ -95,8 +103,8 @@ MOVIE %>%
     description == "PG-13",
     country.y == "USA"
   ) %>%
-  summarise(mean_run_time = mean(run_time) %>% 
-              round(2)) %>% 
+  summarise(mean_run_time = mean(run_time) %>%
+    round(2)) %>%
   kable()
 ```
 
@@ -105,22 +113,30 @@ MOVIE %>%
 Which writers have won a writer award in 1994? List the ids, the first and last names of the writers along with the award names.
 
 ```{r Question 3}
-WRITER_AWARD %>% 
-  left_join(
-    WRITER,
-    join_by(id, title, production_year)
+WRITER_AWARD %>%
+  left_join(WRITER,
+            join_by(id, title, production_year)
   ) %>%
-  left_join(
-    PERSON,
-    join_by(id)
-  ) %>% 
-  left_join(
-    AWARD,
-    join_by(award_name)
-  ) %>% 
+  left_join(PERSON,
+            join_by(id)
+  ) %>%
+  left_join(AWARD,
+            join_by(award_name)
+  ) %>%
   filter(
     production_year == 1994,
   ) %>%
-  select(id, first_name, last_name, award_name) %>% 
+  select(id, first_name, last_name, award_name) %>%
   kable()
+```
+
+#### **Question 4**
+
+Find director(s) who have never been nominated for a director award. List their count.
+
+```{r Question 4}
+DIRECTOR_AWARD %>%
+  left_join(DIRECTOR,
+            join_by(title, production_year))
+  
 ```
