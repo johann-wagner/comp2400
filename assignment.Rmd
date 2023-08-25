@@ -78,15 +78,14 @@ How many persons were born after 1974 whose first name ends with 'e'? List that 
 
 ```{r Question 1}
 PERSON %>%
-  mutate(
-    first_name_last = first_name %>%
-      str_sub(start = -1)
-  ) %>%
+  
   filter(
     year_born > 1974,
-    first_name_last == "e"
+    str_sub(first_name, start = -1) == "e"
   ) %>%
+  
   count() %>%
+  
   kable()
 ```
 
@@ -98,17 +97,21 @@ Find the average run time of movie(s) which were produced before 1991 and catego
 
 ```{r Question 2}
 MOVIE %>%
-  full_join(
+  
+  left_join(
     RESTRICTION,
     join_by(title, production_year)
   ) %>%
+  
   filter(
     production_year < 1991,
     description == "PG-13",
     country.y == "USA"
   ) %>%
+  
   summarise(mean_run_time = mean(run_time) %>%
     round(2)) %>%
+  
   kable()
 ```
 
@@ -118,11 +121,15 @@ Of all the movies that have crew members, how many movies have at most 2 crew me
 
 ```{r Question 3}
 CREW %>% 
+  
   group_by(title, production_year) %>% 
   count() %>%
   ungroup() %>% 
+  
   filter(n <= 2) %>% 
+  
   count() %>% 
+  
   kable()
 ```
 
@@ -140,3 +147,30 @@ DIRECTOR %>%
   count() %>% 
   kable()
 ```
+
+#### **Question 5**
+
+List the first and last name of director(s) who have directed the maximum number of ’comedy’ movies. Order your result in the ascending order of their first names.
+
+```{r Question 5}
+DIRECTOR %>% 
+  
+  left_join(MOVIE,
+            join_by(title, production_year)) %>% 
+  left_join(PERSON,
+            join_by(id)) %>% 
+  
+  filter(major_genre == "comedy") %>% 
+  
+  group_by(id, first_name, last_name) %>% 
+  count() %>% 
+  ungroup() %>% 
+  
+  filter(n == max(n)) %>% 
+  
+  select(first_name, last_name, n) %>% 
+  arrange(first_name) %>% 
+  
+  kable()
+```
+

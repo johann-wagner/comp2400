@@ -1639,16 +1639,15 @@ package is a that integrates computing and reporting.</p>
 <p>How many persons were born after 1974 whose first name ends with ‘e’?
 List that number.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>PERSON <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    <span class="at">first_name_last =</span> first_name <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>      <span class="fu">str_sub</span>(<span class="at">start =</span> <span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>    year_born <span class="sc">&gt;</span> <span class="dv">1974</span>,</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    first_name_last <span class="sc">==</span> <span class="st">&quot;e&quot;</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  </span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    year_born <span class="sc">&gt;</span> <span class="dv">1974</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    <span class="fu">str_sub</span>(first_name, <span class="at">start =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">==</span> <span class="st">&quot;e&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>  </span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>  </span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1670,18 +1669,22 @@ decimal (round to two decimal places).</p>
 <p><em>Hint: in PostgreSQL, the function ROUND(x, n) can round x to n
 decimal places, e.g., if x=0.1129, then ROUND(x, 2) = 0.11.</em></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>MOVIE <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="fu">full_join</span>(</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    RESTRICTION,</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    <span class="fu">join_by</span>(title, production_year)</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>    production_year <span class="sc">&lt;</span> <span class="dv">1991</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>    description <span class="sc">==</span> <span class="st">&quot;PG-13&quot;</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>    country.y <span class="sc">==</span> <span class="st">&quot;USA&quot;</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_run_time =</span> <span class="fu">mean</span>(run_time) <span class="sc">%&gt;%</span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  </span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    RESTRICTION,</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    <span class="fu">join_by</span>(title, production_year)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>  </span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>    production_year <span class="sc">&lt;</span> <span class="dv">1991</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>    description <span class="sc">==</span> <span class="st">&quot;PG-13&quot;</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    country.y <span class="sc">==</span> <span class="st">&quot;USA&quot;</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>  </span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_run_time =</span> <span class="fu">mean</span>(run_time) <span class="sc">%&gt;%</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>  </span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1700,12 +1703,16 @@ decimal places, e.g., if x=0.1129, then ROUND(x, 2) = 0.11.</em></p>
 <p>Of all the movies that have crew members, how many movies have at
 most 2 crew members? List that number.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>CREW <span class="sc">%&gt;%</span> </span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="fu">group_by</span>(title, production_year) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&lt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  </span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="fu">group_by</span>(title, production_year) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  </span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&lt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  </span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>  </span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1739,6 +1746,47 @@ have been nominated.</em></p>
 <tbody>
 <tr class="odd">
 <td align="right">95</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="question-5" class="section level4">
+<h4><strong>Question 5</strong></h4>
+<p>List the first and last name of director(s) who have directed the
+maximum number of ’comedy’ movies. Order your result in the ascending
+order of their first names.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>DIRECTOR <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  </span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  <span class="fu">left_join</span>(MOVIE,</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>            <span class="fu">join_by</span>(title, production_year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>  <span class="fu">left_join</span>(PERSON,</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>            <span class="fu">join_by</span>(id)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>  </span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>  <span class="fu">filter</span>(major_genre <span class="sc">==</span> <span class="st">&quot;comedy&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>  </span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>  <span class="fu">group_by</span>(id, first_name, last_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>  </span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">==</span> <span class="fu">max</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>  </span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>  <span class="fu">select</span>(first_name, last_name, n) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>  <span class="fu">arrange</span>(first_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>  </span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">first_name</th>
+<th align="left">last_name</th>
+<th align="right">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Woody</td>
+<td align="left">Allen</td>
+<td align="right">2</td>
 </tr>
 </tbody>
 </table>
