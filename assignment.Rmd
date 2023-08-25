@@ -1,5 +1,5 @@
 ---
-title: "Assignment"
+title: "COMP 2400 - Assignment 1"
 author: "Johann Wagner, u6958957"
 date: "2023-08-25"
 output:  
@@ -18,17 +18,16 @@ output:
 
 ## Load in relevant packages
 
-```{r Setup and Configuration, echo = FALSE}
-# The tidyverse is a collection of R packages designed for data science.
-# All packages share a similar design philosophy, grammar, and data structures.
-# Tidyverse includes packages such as:
-# ggplot2, dplyr, tidyr, readr, purr, tibble, stringr, lubridate, and forcats.
-### https://www.tidyverse.org/
-library(tidyverse)
+The [tidyverse](https://www.tidyverse.org/) is a collection of R packages designed for data science. All packages share a similar design philosophy, grammar, and data structures. Tidyverse includes packages such as: ggplot2, dplyr, tidyr, readr, purr, tibble, stringr, lubridate, and forcats.
 
-# To easily read in Excel into R.
-### https://readxl.tidyverse.org/
+The [readxl](https://readxl.tidyverse.org/) package is used to easily read in Excel files into R.
+
+The [knitr](https://sachsmc.github.io/knit-git-markr-guide/knitr/knit.html) package is a that integrates computing and reporting.
+
+```{r Setup and Configuration, warning = FALSE, message = FALSE}
+library(tidyverse)
 library(readxl)
+library(knitr)
 ```
 
 ## Load in Movie data
@@ -49,7 +48,9 @@ RESTRICTION <- read_xlsx("movies.xlsx",
 
 # **Assignment Questions**
 
-#### **Question 1:** How many persons were born after 1974 whose first name ends with 'e'? List that number.
+#### **Question 1**
+
+How many persons were born after 1974 whose first name ends with 'e'? List that number.
 
 ```{r Question 1}
 PERSON %>%
@@ -61,10 +62,13 @@ PERSON %>%
     year_born > 1974,
     first_name_last == "e"
   ) %>%
-  count()
+  count() %>% 
+  kable()
 ```
 
-#### **Question 2:** Find the average run time of movie(s) which were produced before 1991 and categorised as 'PG-13' restriction in the USA. List the average as a decimal (round to two decimal places).
+#### **Question 2**
+
+Find the average run time of movie(s) which were produced before 1991 and categorised as 'PG-13' restriction in the USA. List the average as a decimal (round to two decimal places).
 
 *Hint: in PostgreSQL, the function ROUND(x, n) can round x to n decimal places, e.g., if x=0.1129, then ROUND(x, 2) = 0.11.*
 
@@ -79,5 +83,7 @@ MOVIE %>%
     description == "PG-13",
     country.y == "USA"
   ) %>%
-  summarise(mean_run_time = mean(run_time))
+  summarise(mean_run_time = mean(run_time) %>% 
+              round(2)) %>% 
+  kable()
 ```
