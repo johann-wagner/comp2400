@@ -76,6 +76,14 @@ WRITER_AWARD <- read_xlsx("movies.xlsx",
 ACTOR_AWARD <- read_xlsx("movies.xlsx",
   sheet = "ACTOR_AWARD"
 )
+
+CREW_AWARD <- read_xlsx("movies.xlsx",
+  sheet = "CREW_AWARD"
+)
+
+MOVIE_AWARD <- read_xlsx("movies.xlsx",
+  sheet = "MOVIE_AWARD"
+)
 ```
 
 # **Assignment Questions**
@@ -243,6 +251,43 @@ Of all the movies that have won both a director award and an actor award in the 
   
   filter(total_awards == max(total_awards)) %>% 
   
-  select(title, production_year)
+  select(title, production_year) %>% 
+  
+  kable()
+```
+
+#### **Question 8**
+
+How many movies have won at least one award (including movie awards, crew awards, director awards, writer awards and actor awards)? List that number.
+
+```{r}
+MOVIE_AWARD %>% 
+  filter(str_to_lower(result) == "won") %>% 
+  select(title, production_year) %>% 
+  union({
+    CREW_AWARD %>% 
+      filter(str_to_lower(result) == "won") %>% 
+      select(title, production_year)
+  }) %>% 
+  union({
+  DIRECTOR_AWARD %>% 
+    filter(str_to_lower(result) == "won") %>% 
+    select(title, production_year)
+  }) %>% 
+  union({
+  WRITER_AWARD %>% 
+    filter(str_to_lower(result) == "won") %>% 
+    select(title, production_year)
+  }) %>% 
+  union({
+  ACTOR_AWARD %>% 
+    filter(str_to_lower(result) == "won") %>% 
+    select(title, production_year)
+  }) %>% 
+  
+  count() %>% 
+  
+  kable()
+  
 ```
 
