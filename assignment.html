@@ -1615,21 +1615,29 @@ package is a that integrates computing and reporting.</p>
 <span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;CREW&quot;</span></span>
 <span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>)</span>
 <span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>RESTRICTION <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;RESTRICTION&quot;</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>ROLE <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;ROLE&quot;</span></span>
 <span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>)</span>
 <span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>DIRECTOR <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;DIRECTOR&quot;</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>RESTRICTION <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;RESTRICTION&quot;</span></span>
 <span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>)</span>
 <span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>DIRECTOR_AWARD <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
-<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;DIRECTOR_AWARD&quot;</span></span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>DIRECTOR <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;DIRECTOR&quot;</span></span>
 <span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>)</span>
 <span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a>WRITER_AWARD <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
-<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;WRITER_AWARD&quot;</span></span>
-<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a>DIRECTOR_AWARD <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;DIRECTOR_AWARD&quot;</span></span>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a>)</span>
+<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a>WRITER_AWARD <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;WRITER_AWARD&quot;</span></span>
+<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a>)</span>
+<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a>ACTOR_AWARD <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;movies.xlsx&quot;</span>,</span>
+<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">&quot;ACTOR_AWARD&quot;</span></span>
+<span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </div>
 <div id="assignment-questions" class="section level1">
@@ -1827,6 +1835,110 @@ to two decimal places).</p>
 </tr>
 </tbody>
 </table>
+</div>
+<div id="question-7" class="section level4">
+<h4><strong>Question 7</strong></h4>
+<p>Of all the movies that have won both a director award and an actor
+award in the same year, which movie(s) have won the largest combined
+total of both director and actor awards in a single year? List their
+title(s) and production year(s).</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># All movies joined with total number of won director awards and total number</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co"># of won actor awards.</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>MOVIE <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  </span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>    {</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>      <span class="co"># Only the directors joined with total number of won director awards</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>      DIRECTOR <span class="sc">%&gt;%</span> </span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>        <span class="fu">inner_join</span>({</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>          <span class="co"># Calculate total number of director awards for each movie</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>          <span class="co"># awarded in same year</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>          DIRECTOR_AWARD <span class="sc">%&gt;%</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>            <span class="fu">filter</span>(<span class="fu">str_to_lower</span>(result) <span class="sc">==</span> <span class="st">&quot;won&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>            <span class="fu">group_by</span>(title, production_year, year_of_award) <span class="sc">%&gt;%</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>            <span class="fu">summarise</span>(<span class="at">total_director_awards =</span> <span class="fu">n</span>())</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>        },</span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>        <span class="fu">join_by</span>(title, production_year))</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>    },</span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>    <span class="fu">join_by</span>(title, production_year)</span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>  </span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>    {</span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>      <span class="co"># Only the actors joined with total number of won actor awards</span></span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>      ROLE <span class="sc">%&gt;%</span> </span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>        <span class="fu">inner_join</span>({</span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>          <span class="co"># Calculate total number of actor awards for each movie</span></span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a>          <span class="co"># awarded in same year</span></span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>          ACTOR_AWARD <span class="sc">%&gt;%</span></span>
+<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a>            <span class="fu">filter</span>(<span class="fu">str_to_lower</span>(result) <span class="sc">==</span> <span class="st">&quot;won&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a>            <span class="fu">group_by</span>(title, production_year, description, year_of_award) <span class="sc">%&gt;%</span></span>
+<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a>            <span class="fu">summarise</span>(<span class="at">total_actor_awards =</span> <span class="fu">n</span>())</span>
+<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a>        },</span>
+<span id="cb9-34"><a href="#cb9-34" tabindex="-1"></a>        <span class="fu">join_by</span>(title, production_year, description))</span>
+<span id="cb9-35"><a href="#cb9-35" tabindex="-1"></a>    },</span>
+<span id="cb9-36"><a href="#cb9-36" tabindex="-1"></a>    <span class="fu">join_by</span>(title, production_year)</span>
+<span id="cb9-37"><a href="#cb9-37" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;title&#39;, &#39;production_year&#39;. You can
+## override using the `.groups` argument.
+## `summarise()` has grouped output by &#39;title&#39;, &#39;production_year&#39;, &#39;description&#39;.
+## You can override using the `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 106 × 13
+##    title      production_year country run_time major_genre  id.x year_of_award.x
+##    &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;           &lt;dbl&gt;
+##  1 Titanic               1997 USA          195 romance         1            1998
+##  2 Shakespea…            1998 UK           122 romance        NA              NA
+##  3 TheCiderH…            1999 USA          125 drama          NA              NA
+##  4 Gandhi                1982 India        188 drama          NA              NA
+##  5 AmericanB…            1999 USA          121 drama          81            1999
+##  6 Affliction            1997 USA          113 drama          NA              NA
+##  7 LifeisBea…            1997 Italy        118 comedy         NA              NA
+##  8 BoysDontC…            1999 USA          118 drama          NA              NA
+##  9 SavingPri…            1998 USA          170 action       1291            1998
+## 10 TheBirds              1963 USA          119 horror         NA              NA
+## # ℹ 96 more rows
+## # ℹ 6 more variables: total_director_awards &lt;int&gt;, id.y &lt;dbl&gt;,
+## #   description &lt;chr&gt;, credits &lt;chr&gt;, year_of_award.y &lt;dbl&gt;,
+## #   total_actor_awards &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>{</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  <span class="co"># Total number of won director awards for each movie and award year</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>  DIRECTOR_AWARD <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>    </span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">str_to_lower</span>(result) <span class="sc">==</span> <span class="st">&quot;won&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>    </span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>    <span class="fu">group_by</span>(title, production_year, year_of_award) <span class="sc">%&gt;%</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">total_director_awards =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a>  } <span class="sc">%&gt;%</span> </span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>  </span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>  <span class="co"># inner_join, because you only want director/actor awards with same award year</span></span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>  <span class="fu">inner_join</span>(</span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a>    {</span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a>      <span class="co"># Total number of won actor awards for each movie and award year</span></span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a>      ACTOR_AWARD <span class="sc">%&gt;%</span></span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a>        </span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a>        <span class="fu">filter</span>(<span class="fu">str_to_lower</span>(result) <span class="sc">==</span> <span class="st">&quot;won&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a>        </span>
+<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a>        <span class="fu">group_by</span>(title, production_year, year_of_award) <span class="sc">%&gt;%</span></span>
+<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">total_actor_awards =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a>        <span class="fu">ungroup</span>()</span>
+<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a>      },</span>
+<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a>    <span class="fu">join_by</span>(title, production_year, year_of_award)</span>
+<span id="cb12-25"><a href="#cb12-25" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a>  </span>
+<span id="cb12-27"><a href="#cb12-27" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_awards =</span> total_director_awards <span class="sc">+</span> total_actor_awards) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-28"><a href="#cb12-28" tabindex="-1"></a>  </span>
+<span id="cb12-29"><a href="#cb12-29" tabindex="-1"></a>  <span class="fu">filter</span>(total_awards <span class="sc">==</span> <span class="fu">max</span>(total_awards)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-30"><a href="#cb12-30" tabindex="-1"></a>  </span>
+<span id="cb12-31"><a href="#cb12-31" tabindex="-1"></a>  <span class="fu">select</span>(title, production_year)</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;title&#39;, &#39;production_year&#39;. You can
+## override using the `.groups` argument.
+## `summarise()` has grouped output by &#39;title&#39;, &#39;production_year&#39;. You can
+## override using the `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 1 × 2
+##   title   production_year
+##   &lt;chr&gt;             &lt;dbl&gt;
+## 1 Traffic            2000</code></pre>
 </div>
 </div>
 
