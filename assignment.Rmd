@@ -212,47 +212,7 @@ MOVIE %>%
 
 Of all the movies that have won both a director award and an actor award in the same year, which movie(s) have won the largest combined total of both director and actor awards in a single year? List their title(s) and production year(s). 
 
-```{r Potential Solution}
-# All movies joined with total number of won director awards and total number
-# of won actor awards.
-MOVIE %>%
-  
-  left_join(
-    {
-      # Only the directors joined with total number of won director awards
-      DIRECTOR %>% 
-        inner_join({
-          # Calculate total number of director awards for each movie
-          # awarded in same year
-          DIRECTOR_AWARD %>%
-            filter(str_to_lower(result) == "won") %>%
-            group_by(title, production_year, year_of_award) %>%
-            summarise(total_director_awards = n())
-        },
-        join_by(title, production_year))
-    },
-    join_by(title, production_year)
-  ) %>%
-  
-  left_join(
-    {
-      # Only the actors joined with total number of won actor awards
-      ROLE %>% 
-        inner_join({
-          # Calculate total number of actor awards for each movie
-          # awarded in same year
-          ACTOR_AWARD %>%
-            filter(str_to_lower(result) == "won") %>%
-            group_by(title, production_year, description, year_of_award) %>%
-            summarise(total_actor_awards = n())
-        },
-        join_by(title, production_year, description))
-    },
-    join_by(title, production_year)
-  )
-```
-
-```{r}
+```{r Question 7}
 {
   # Total number of won director awards for each movie and award year
   DIRECTOR_AWARD %>%
