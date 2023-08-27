@@ -110,7 +110,8 @@ MOVIE %>%
   ) %>%
   
   summarise(mean_run_time = mean(run_time) %>%
-    round(2)) %>%
+    round(2) %>% 
+    format(nsmall = 2)) %>%
   
   kable()
 ```
@@ -171,6 +172,31 @@ DIRECTOR %>%
   select(first_name, last_name, n) %>% 
   arrange(first_name) %>% 
   
+  kable()
+```
+
+#### **Question 6**
+
+What proportion of comedy movies are produced in Australia among all comedy movies in this database? List the proportion as a decimal (round to two decimal places).
+
+```{r Question 6}
+MOVIE %>%
+  
+  filter(str_to_lower(major_genre) == "comedy") %>%
+  
+  group_by(country) %>%
+  count() %>%
+  ungroup() %>% 
+  
+  mutate(proportion = n / sum(n)) %>% 
+  
+  filter(str_to_lower(country) == "australia") %>%
+  
+  pull(proportion) %>%
+  
+  round(2) %>% 
+  format(nsmall = 2) %>% 
+
   kable()
 ```
 

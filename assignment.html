@@ -1682,18 +1682,19 @@ decimal places, e.g., if x=0.1129, then ROUND(x, 2) = 0.11.</em></p>
 <span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>  </span>
 <span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_run_time =</span> <span class="fu">mean</span>(run_time) <span class="sc">%&gt;%</span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>  </span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>    <span class="fu">format</span>(<span class="at">nsmall =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>  </span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
-<th align="right">mean_run_time</th>
+<th align="left">mean_run_time</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">107.5</td>
+<td align="left">107.50</td>
 </tr>
 </tbody>
 </table>
@@ -1787,6 +1788,42 @@ order of their first names.</p>
 <td align="left">Woody</td>
 <td align="left">Allen</td>
 <td align="right">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="question-6" class="section level4">
+<h4><strong>Question 6</strong></h4>
+<p>What proportion of comedy movies are produced in Australia among all
+comedy movies in this database? List the proportion as a decimal (round
+to two decimal places).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>MOVIE <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  </span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_to_lower</span>(major_genre) <span class="sc">==</span> <span class="st">&quot;comedy&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  </span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>  </span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">proportion =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>  </span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_to_lower</span>(country) <span class="sc">==</span> <span class="st">&quot;australia&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>  </span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>  <span class="fu">pull</span>(proportion) <span class="sc">%&gt;%</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>  </span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>  <span class="fu">format</span>(<span class="at">nsmall =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">x</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0.10</td>
 </tr>
 </tbody>
 </table>
