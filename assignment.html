@@ -1947,6 +1947,245 @@ number.</p>
 </tbody>
 </table>
 </div>
+<div id="question-9" class="section level4">
+<h4><strong>Question 9</strong></h4>
+<p>Which director(s) directed the least variety of movies (i.e., the
+least number of distinct major genres)? List their id(s).</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>MOVIE <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  </span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>  <span class="fu">inner_join</span>(DIRECTOR,</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>             <span class="fu">join_by</span>(title, production_year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>  </span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>  <span class="fu">group_by</span>(id, major_genre) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>  </span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>  </span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">==</span> <span class="fu">min</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a>  </span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a>  <span class="fu">select</span>(id) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a>  </span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">id</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">21</td>
+</tr>
+<tr class="even">
+<td align="right">41</td>
+</tr>
+<tr class="odd">
+<td align="right">81</td>
+</tr>
+<tr class="even">
+<td align="right">101</td>
+</tr>
+<tr class="odd">
+<td align="right">121</td>
+</tr>
+<tr class="even">
+<td align="right">141</td>
+</tr>
+<tr class="odd">
+<td align="right">201</td>
+</tr>
+<tr class="even">
+<td align="right">222</td>
+</tr>
+<tr class="odd">
+<td align="right">261</td>
+</tr>
+<tr class="even">
+<td align="right">301</td>
+</tr>
+<tr class="odd">
+<td align="right">321</td>
+</tr>
+<tr class="even">
+<td align="right">341</td>
+</tr>
+<tr class="odd">
+<td align="right">361</td>
+</tr>
+<tr class="even">
+<td align="right">381</td>
+</tr>
+<tr class="odd">
+<td align="right">481</td>
+</tr>
+<tr class="even">
+<td align="right">501</td>
+</tr>
+<tr class="odd">
+<td align="right">521</td>
+</tr>
+<tr class="even">
+<td align="right">601</td>
+</tr>
+<tr class="odd">
+<td align="right">641</td>
+</tr>
+<tr class="even">
+<td align="right">681</td>
+</tr>
+<tr class="odd">
+<td align="right">741</td>
+</tr>
+<tr class="even">
+<td align="right">781</td>
+</tr>
+<tr class="odd">
+<td align="right">801</td>
+</tr>
+<tr class="even">
+<td align="right">821</td>
+</tr>
+<tr class="odd">
+<td align="right">841</td>
+</tr>
+<tr class="even">
+<td align="right">881</td>
+</tr>
+<tr class="odd">
+<td align="right">921</td>
+</tr>
+<tr class="even">
+<td align="right">941</td>
+</tr>
+<tr class="odd">
+<td align="right">961</td>
+</tr>
+<tr class="even">
+<td align="right">1014</td>
+</tr>
+<tr class="odd">
+<td align="right">1027</td>
+</tr>
+<tr class="even">
+<td align="right">1037</td>
+</tr>
+<tr class="odd">
+<td align="right">1038</td>
+</tr>
+<tr class="even">
+<td align="right">1044</td>
+</tr>
+<tr class="odd">
+<td align="right">1051</td>
+</tr>
+<tr class="even">
+<td align="right">1060</td>
+</tr>
+<tr class="odd">
+<td align="right">1070</td>
+</tr>
+<tr class="even">
+<td align="right">1086</td>
+</tr>
+<tr class="odd">
+<td align="right">1096</td>
+</tr>
+<tr class="even">
+<td align="right">1110</td>
+</tr>
+<tr class="odd">
+<td align="right">1124</td>
+</tr>
+<tr class="even">
+<td align="right">1131</td>
+</tr>
+<tr class="odd">
+<td align="right">1132</td>
+</tr>
+<tr class="even">
+<td align="right">1135</td>
+</tr>
+<tr class="odd">
+<td align="right">1143</td>
+</tr>
+<tr class="even">
+<td align="right">1151</td>
+</tr>
+<tr class="odd">
+<td align="right">1158</td>
+</tr>
+<tr class="even">
+<td align="right">1165</td>
+</tr>
+<tr class="odd">
+<td align="right">1173</td>
+</tr>
+<tr class="even">
+<td align="right">1179</td>
+</tr>
+<tr class="odd">
+<td align="right">1191</td>
+</tr>
+<tr class="even">
+<td align="right">1195</td>
+</tr>
+<tr class="odd">
+<td align="right">1202</td>
+</tr>
+<tr class="even">
+<td align="right">1210</td>
+</tr>
+<tr class="odd">
+<td align="right">1221</td>
+</tr>
+<tr class="even">
+<td align="right">1225</td>
+</tr>
+<tr class="odd">
+<td align="right">1241</td>
+</tr>
+<tr class="even">
+<td align="right">1248</td>
+</tr>
+<tr class="odd">
+<td align="right">1254</td>
+</tr>
+<tr class="even">
+<td align="right">1261</td>
+</tr>
+<tr class="odd">
+<td align="right">1267</td>
+</tr>
+<tr class="even">
+<td align="right">1274</td>
+</tr>
+<tr class="odd">
+<td align="right">1284</td>
+</tr>
+<tr class="even">
+<td align="right">1291</td>
+</tr>
+<tr class="odd">
+<td align="right">1297</td>
+</tr>
+<tr class="even">
+<td align="right">1305</td>
+</tr>
+<tr class="odd">
+<td align="right">1317</td>
+</tr>
+<tr class="even">
+<td align="right">1324</td>
+</tr>
+<tr class="odd">
+<td align="right">1343</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 

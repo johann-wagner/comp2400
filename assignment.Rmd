@@ -260,7 +260,7 @@ Of all the movies that have won both a director award and an actor award in the 
 
 How many movies have won at least one award (including movie awards, crew awards, director awards, writer awards and actor awards)? List that number.
 
-```{r}
+```{r Question 8}
 MOVIE_AWARD %>% 
   filter(str_to_lower(result) == "won") %>% 
   select(title, production_year) %>% 
@@ -289,5 +289,30 @@ MOVIE_AWARD %>%
   
   kable()
   
+```
+
+#### **Question 9**
+
+Which director(s) directed the least variety of movies (i.e., the least number of distinct major genres)? List their id(s).
+
+```{r Question 9}
+MOVIE %>% 
+  
+  inner_join(DIRECTOR,
+             join_by(title, production_year)) %>% 
+  
+  group_by(id, major_genre) %>% 
+  count() %>% 
+  ungroup() %>% 
+  
+  group_by(id) %>% 
+  count() %>% 
+  ungroup() %>% 
+  
+  filter(n == min(n)) %>% 
+  
+  select(id) %>% 
+  
+  kable()
 ```
 
