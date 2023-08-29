@@ -316,3 +316,19 @@ MOVIE %>%
   kable()
 ```
 
+#### **Question 10**
+
+List all the pairs of movies which have won any award in the same year.
+List the pairs of their title and production year.
+
+Note that the result should not contain duplicated pairs of title and production year, e.g., {(title1, production year1), (title2, production year2)} and {(title2, production year2), (title1, production year1)} are considered as duplicated pairs and your query should only produce one of them in the result.
+
+*Hint: in PostgreSQL, the function CONCAT(A1, A2, . . . , An) can be used to combine selected attributes.*
+
+```{r Question 10}
+
+# Create ALL_MOVIE_AWARD
+
+# 
+```
+
